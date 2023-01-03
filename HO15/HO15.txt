@@ -1,0 +1,30 @@
+O escalonamento Sa possui deadlock entre as transações T2 e T1, ao tentar bloquear x (que já havia sido bloqueado por T1).
+O escalonamento que será efetivamente executado, considerando a técnica de detecção, é:
+
+Sa → l1(x), r1(x), l2(x), r2(x), w1(x), l1(y), r1(y), w2(x), u2(x), w1(y), u1(x), u1(y).
+
+Sa → r1(x), r2(x), w1(x), r1(y), w2(x), w1(y);
+
+No ciclo entre T1 e T2, T2 aborta e é reescalonada por ser a mais nova.
+
+ 
+
+O escalonamento Sa possui deadlock entre as transações T1 e T2.
+O escalonamento que será efetivamente executado, considerando a técnica de resolução de controle de concorrência por bloqueio compartilhado, é:
+
+T1 paralisa ao tentar wl1(x), aguardando T2 liberar o rl2(x), e T2 paralisa ao tentar wl2(x), aguardando T1 liberar o rl1(x);
+
+Sa → r1(x), r2(x), w1(x), r1(y), w2(x), w1(y);
+
+No ciclo entre T1 e T2, T2 aborta e é reescalonada por ser a mais nova.
+
+ 
+
+Se Ti inicia antes de Tj, então TS(Ti) < TS(Tj);
+Sa → r1(x), r2(x), w1(x), r1(y), w2(x), w1(y);
+
+TS(T1) < TS(T2);
+
+T1 não consegue wl1(x) por rl2(x) de T2, então T2 aborta e é reescalonada;
+
+Sa 0 → r1(x), w1(x), r1(y), w1(y).
