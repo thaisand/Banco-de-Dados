@@ -1,4 +1,4 @@
-Especificar as seguintes consultas em SQL para recuperar os dados em um banco de dados relacional, considerando o conjunto de dados (dataset) denominado IMDB-sample disponível na calculadora RelaX Links to an external site.:
+Especificar as seguintes consultas em SQL para recuperar os dados em um banco de dados relacional, considerando o conjunto de dados (dataset) denominado IMDB-sample disponível na calculadora RelaX:
 <ol>
 <li> Projetar o primeiro nome e o último nome dos atores de sexo feminino;
 <li> Projetar o nome dos filmes com ano superior à 1999;
