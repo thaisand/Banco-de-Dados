@@ -1,0 +1,62 @@
+1.      Projetar o primeiro nome e o último nome dos atores de sexo feminino.
+SELECT first_name, last_name
+
+FROM actors
+
+WHERE gender = 'F';
+
+2.      Projetar o nome dos filmes com ano superior à 1999.
+SELECT movies.name
+
+FROM movies
+
+WHERE movies.year > 1999
+
+3.      Projetar o nome do filme e o nome do diretor de cada filme.
+SELECT movies.name, directors.first_name, directors.last_name
+
+FROM movies, directors, movies_directors
+
+WHERE movies_directors.movie_id = movies.id
+
+AND movies_directors.director_id = directors.id
+
+4.      Projetar o nome do filme, nome do ator e o papel que cada ator teve no filme para filmes com ranking acima da nota 6.
+SELECT movies.name, actors.first_name, actors.last_name, roles.role
+
+FROM actors, roles
+
+INNER JOIN movies
+
+ON roles.movie_id = movies.id AND roles.actor_id = actors.id
+
+WHERE movies.rank > 6
+
+5.      Projetar o nome do diretor e o número de filmes que cada diretor dirigiu.
+SELECT DISTINCT first_name, last_name, COUNT(movie_id) AS Filmes
+
+FROM directors
+
+INNER JOIN movies_directors
+
+ON directors.id = movies_directors.director_id
+
+GROUP BY first_name, last_name, director_id;
+
+6.      Projetar o gênero e o número de filmes de cada gênero.
+SELECT movies_genres.genre, COUNT(movies_genres.genre) as filmes
+
+FROM movies_genres
+
+GROUP BY genre
+
+7.      Projetar o gênero, o ranking (nota) médio, mínimo e máximo dos filmes do gênero.
+SELECT movies_genres.genre, AVG(movies.rank) AS rankingMedio, MIN(movies.rank) AS minRanking, MAX(movies.rank) AS maxRanking
+
+FROM movies_genres
+
+INNER JOIN movies
+
+ON movies.id = movies_genres.movie_id
+
+GROUP BY genre

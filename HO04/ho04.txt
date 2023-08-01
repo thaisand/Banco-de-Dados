@@ -1,0 +1,60 @@
+1.      Projetar o primeiro nome e o último nome dos atores de sexo feminino.
+atrizes = σ gender = 'F' actors
+
+π first_name, last_name (atrizes)
+
+ 
+
+2.      Projetar o nome dos filmes com ano superior à 1999.
+filmes = π name, year (σ year > 1999 (movies))
+
+π name filmes
+
+ 
+
+3.      Projetar o nome do filme e o nome do diretor de cada filme;
+filmes = π name, year (movies)
+
+diretores = filmes ⨝ id = id (directors)
+
+π name, first_name, last_name (diretores)
+
+ 
+
+4.      Projetar o nome do filme, nome do ator e o papel que cada ator teve no filme para filmes com ranking acima da nota 6;
+filmes6 = π name, year, rank (σ rank > 6 (movies))
+
+atores = filmes6 ⨝ id = id (actors)
+
+papeis = atores ⨝ id = actor_id (roles)
+
+π name, first_name, last_name, role papeis
+
+ 
+
+5.      Projetar o nome do diretor e o número de filmes que cada diretor dirigiu;
+diretores = π id, first_name, last_name (directors)
+
+filmes = diretores ⨝ id = director_id (movies_directors)
+
+numFilmes = γ director_id, first_name, last_name; count(movie_id)->num (filmes)
+
+π first_name, last_name, num (numFilmes)
+
+ 
+
+6.      Projetar o gênero e o número de filmes de cada gênero; 
+filmes =  π movie_id, genre (movies_genres)
+
+numGenero = γ genre; count(movie_id)->num (filmes)
+
+π genre, num (numGenero)
+
+ 
+
+7.      Projetar o gênero, o ranking (nota) médio, mínimo e máximo dos filmes do gênero.
+filmes =  movies_genres ⨝ id = movie_id (movies)
+
+resp = γ genre; min(rank)->minimo, max(rank)->maximo, avg(rank)->media (filmes)
+
+π genre, media, minimo, maximo (resp)

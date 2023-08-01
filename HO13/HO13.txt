@@ -1,0 +1,28 @@
+SELECT A.CPF, A.Nome
+FROM Funcionarios A, Funcionarios B
+WHERE A.CPF = B.CPF_Supervisor
+EXCEPT
+SELECT C.CPF, C.Nome
+FROM Clientes C, Funcionarios A
+WHERE C.CPF = A.CPF
+
+SELECT M.CodFilme, F.Nome
+FROM Midias M, Filmes F
+WHERE A.CodFilme = F.Codigo
+AND M.Tipo = “DVD”
+UNION 
+SELECT M.CodFilme, F.Nome
+FROM Midias M, Filmes F
+WHERE M.CodFilme = F.Codigo
+AND M.Tipo = “VHS”
+
+SELECT A.CPF_Cliente, A.ID_Midia, A.DataLocacao
+FROM Aluguel A, Clientes C
+WHERE A.CPF_Cliente, C.CPF
+AND C.Sexo != ‘F’
+INTERSECT
+SELECT A.CPF_Cliente, A.ID_Midia, A.DataLocacao
+FROM Aluguel A, Clientes C, Pagamentos P
+WHERE P.CPF_Cliente = A.CPF_Cliente
+AND P.ID_Midia = A.ID_Midia
+AND P.DataLocacao = A.DataLocacao
